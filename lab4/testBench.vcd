@@ -1,0 +1,114 @@
+$date
+	Mon Feb  8 17:17:37 2021
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module top $end
+$var wire 32 ! out [31:0] $end
+$var reg 24 " address [23:0] $end
+$var reg 1 # clk $end
+$var reg 32 $ data [31:0] $end
+$var reg 1 % mode $end
+$scope module tb $end
+$var wire 18 & addr [17:0] $end
+$var wire 1 # clk $end
+$var wire 32 ' inData [31:0] $end
+$var wire 1 % mode $end
+$var wire 4 ( tagArr [3:0] $end
+$var wire 4 ) offsetArr [3:0] $end
+$var wire 10 * indexArr [9:0] $end
+$var reg 32 + outData [31:0] $end
+$scope module addr_01 $end
+$var wire 18 , addr [17:0] $end
+$var wire 4 - tagArr [3:0] $end
+$var wire 4 . offsetArr [3:0] $end
+$var wire 10 / indexArr [9:0] $end
+$upscope $end
+$scope module cache $end
+$scope task initialize $end
+$var integer 32 0 i [31:0] $end
+$upscope $end
+$upscope $end
+$scope module ram $end
+$scope task initialize $end
+$var integer 32 1 i [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b1000000000000000000 1
+b10000000000 0
+bx /
+bx .
+bx -
+bx ,
+bx +
+bx *
+bx )
+bx (
+bx '
+bx &
+x%
+bx $
+1#
+bx "
+bx !
+$end
+#20
+0#
+#40
+1#
+#50
+b0 (
+b0 -
+b0 *
+b0 /
+b0 )
+b0 .
+b0 &
+b0 ,
+0%
+b0 "
+#60
+0#
+#80
+b10010000101010011010100100100 !
+b10010000101010011010100100100 +
+1#
+#100
+b1111 (
+b1111 -
+b1001011111 *
+b1001011111 /
+b1011 )
+b1011 .
+b111110010111111011 &
+b111110010111111011 ,
+0#
+1%
+b1011010101011010 $
+b1011010101011010 '
+b101001111110010111111011 "
+#120
+1#
+#140
+0#
+#150
+0%
+b1000010001011 $
+b1000010001011 '
+#160
+b1011010101011010 !
+b1011010101011010 +
+1#
+#180
+0#
+#200
+1#
