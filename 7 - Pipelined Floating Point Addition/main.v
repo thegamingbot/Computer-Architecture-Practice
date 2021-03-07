@@ -47,7 +47,7 @@ module adder(input [31:0] a, input [31:0] b, input clk, output [31:0] s);
     /*
         Compute the sum / difference of the modified manitssas
     */
-    compute c_02(s1, s2, mm1[23:0], mm2[23:0], e1, clk, m3, e3);
+    compute c_02(s1, s2, mm1, mm2, e1, clk, m3, e3);
     /*
         Concatenation of the sign, exponent and mantissa bits in accordance to the edge cases
     */
