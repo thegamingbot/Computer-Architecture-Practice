@@ -4,6 +4,7 @@
 `include "compare.v"
 `include "compute.v"
 `include "edgeCases.v"
+`include "barrelShifter.v"
 /*
     A module that adds two numbers represented in IEEE 754 format
 */
@@ -16,7 +17,7 @@ module adder(input [31:0] a, input [31:0] b, input clk, output [31:0] s);
     wire s1, s2, s3;
     wire [7:0] e1, e2, e3, d;
     wire [22:0] m1, m2, m3;
-    wire [23:0] mm1, mm2;
+    wire [23:0] mm1, mm2, mm2D;
     wire c;
     /*
         Compare a and b
@@ -43,11 +44,13 @@ module adder(input [31:0] a, input [31:0] b, input clk, output [31:0] s);
     */
     assign d = e1 - e2;
     assign mm1 = {|e1, m1};
-    assign mm2 = {|e2, m2} >> d;
+    barrelRight #(24, 5) br ({|e2, m2}, d[4:0], mm2);
+    nDFF #(24) ndff_mm2 (mm2, clk, 1'b1, mm2D);
+
     /*
         Compute the sum / difference of the modified manitssas
     */
-    compute c_02(s1, s2, mm1, mm2, e1, clk, m3, e3);
+    compute c_02(s1, s2, mm1, mm2D, e1, clk, m3, e3);
     /*
         Concatenation of the sign, exponent and mantissa bits in accordance to the edge cases
     */

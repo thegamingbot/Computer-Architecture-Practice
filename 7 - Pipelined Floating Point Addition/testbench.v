@@ -15,35 +15,32 @@ module top;
         /*
             Infinite + Normal number
         */
+        #5
         a = {1'b0, {8{1'b1}}, 23'b0}; b = {1'b0, {7{1'b1}}, 24'b111011};
-        #100
-        $display("a = %b\tb = %b\tsum = %b\t\n", a, b, s);
         /*
             Denormal number + Normal number
         */
+        #5
         a = {31'b0,1'b1}; b = 32'b00111111110010100011110101110001;
-        #100
-        $display("a = %b\tb = %b\tsum = %b\t\n", a, b, s);
         /*
             Normal number + Normal number
         */
+        #5
         a = 32'b01000110000111000100000000000000; b = 32'b11000101111110100000000000000000;
-        #100
-        $display("a = %b\tb = %b\tsum = %b\t\n", a, b, s);
         /*
             Positive number + Negative number
         */
-        a = 32'b11000101111110100000000000000000; b = 32'b01000101111110100000000000000000;
-        #100
-        $display("a = %b\tb = %b\tsum = %b\t\n", a, b, s);
+        #5
+        a = 32'b01000101111110100000000000000000; b = 32'b11000101111110100000000000000000;
         /*
             NaN + Normal Number
         */
+        #5
         a = {1'b0, {8{1'b1}}, 23'b1}; b = 32'b01000101111110100000000000000000;
-        #100
-        $display("a = %b\tb = %b\tsum = %b\t\n", a, b, s);
-        #100
-        $finish;
+    end
+
+    initial begin
+        $monitor($time, "\ta = %b\tb = %b\tsum = %b\t\n", a, b, s);
     end
 
 endmodule
