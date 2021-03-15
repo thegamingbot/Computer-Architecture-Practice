@@ -3,6 +3,7 @@
 */
 `include "zeroInf.v"
 `include "wallaceTreeMultiplier.v"
+`include "barrelShifter.v"
 /*
     A module that mutiplies two numbers represented in IEEE 754 format
 */
@@ -12,11 +13,11 @@ module IEEEmultiply (input [31:0] a, input [31:0] b, input clk, output [31:0] c)
         Required registers and wires for the module
     */
     wire s1, s2, s3;
-    wire [7:0] e1, e2, e3, e3F;
-    wire [22:0] m1, m2, m3, m3F;
-    wire [63:0] prod, prodD;
+    wire [7:0] e1, e2, e3, e3F, e3D;
+    wire [22:0] m1, m2, m3, m3F, m3D;
+    wire [63:0] prod, prodD, prodB;
     wire [31:0] mm1, mm2;
-    reg [47:0] mprod;
+    wire [47:0] mprod, mprodD;
     reg [7:0] ex;
     integer i;
     /*
@@ -67,21 +68,24 @@ module IEEEmultiply (input [31:0] a, input [31:0] b, input clk, output [31:0] c)
             Shift the product i steps left for normalizing
             Decrement the exponent by i amounts
         */
-        mprod = prodD << i;
         ex = ex - i;
     end
+    barrelLeft #(48, 6) br (prodD[47:0], i, mprod);
+    nDFF #(48) blD (mprod, clk, 1'b1, mprodD);
     /*
         Copy the exponent, and first 23 bits from the modified product. 
     */
     assign e3 = ex;
-    assign m3 = mprod[46:24];
+    assign m3 = mprodD[46:24];
     /*
         Modify the outputs to the edge cases, if any
     */
     zeroInf zf_01 (e1, m1, e2, m2, e3, m3, e3F, m3F);
+    nDFF #(23) m3DFF (m3F, clk, 1'b1, m3D);
+    nDFF #(8) e3DFF (e3F, clk, 1'b1, e3D);
     /*
         Concat the sign bit, exponent bits and the mantissa bits
     */
-    assign c = {s3, e3F, m3F};
+    assign c = {s3, e3D, m3D};
 
 endmodule
