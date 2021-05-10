@@ -8,23 +8,23 @@ module top;
 
     wallaceTreeMultiplier wm(A, B, clk, S);
 
-    always #5 clk = ~clk;
+    always #1 clk = ~clk;
 
     initial
     begin
         clk = 1'b1;
-        A = 32'd3423;
-        B = 32'd3413;
-        #100
-        $display("A =  %b (%d)\nB =  %b (%d)\nS = %b (%d)\n", A, A, B, B, S, S);
-        
-        A = 32'd6535473;
+        A = 32'd1021;
+        B = 32'd10000000;
+        #5
+        A = 32'd65354733;
         B = 32'd67445575;
-        #100
-        $display("A =  %b (%d)\nB =  %b (%d)\nS = %b (%d)\n", A, A, B, B, S, S);
         
         #500
         $finish;
+    end
+
+    initial begin
+        $monitor($time, " A =  %d\tB =  %d\tS = %d", A, B, S);
     end
 
 endmodule
